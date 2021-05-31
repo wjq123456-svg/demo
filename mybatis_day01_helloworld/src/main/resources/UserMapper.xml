@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+
+    <!--查询所有用户-->
+    <!--
+        id: 当前statment的唯一标识
+        resultType: 把sql语句执行结果的每条数据，封装成指定的java类型
+    -->
+    <select id="findALL" resultType="com.itheima.User">
+    select * from user where  username = 'Jack'
+    </select>
+
+    <!--插入用户-->
+    <!--
+        #{id}:代表sql语句中的占位符？，其中的id代表的是User对象中的属性名
+
+        在查询用户完成后，把数据库中user的id值  赋值给pojo中user的id属性
+        keyProperty="id"  把自增主键值  赋值给 pojo中user的id属性
+        order="AFTER"  在insert语句执行完成后  执行selectKey查询操作
+        resultType="integer" selectKey查询的返回值类型
+
+    -->
+    <insert id="insert" parameterType="user">
+        insert into user values(#{id},#{username},#{sex},#{address})
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!--根据用户id 删除用户-->
+    <delete id="delete" parameterType="integer">
+        delete from user where id = #{id}
+    </delete>
+
+    <!--根据用户id 更新用户-->
+    <update id="update" parameterType="com.itheima.User">
+        update user
+        set username=#{username},sex=#{sex},address=#{address}
+        where id=#{id}
+    </update>
+
+    <!--根据用户id，查询用户-->
+    <select id="findById" parameterType="integer" resultType="com.itheima.User">
+        select * from user where id = #{id}
+    </select>
+
+    <!--根据用户名，做模糊查询-->
+    <!--
+            方式一：字符串拼接，相当于statment
+            select * from user  where username like '%${value}%'
+
+            方式二：使用mysql函数Concat进行拼接
+            select * from user where username like CONCAT('%',#{username},'%');
+
+            两种sql的区别：
+                select * from user  where username like '%j% or 1 = 1'
+                select * from user where username like CONCAT('%',#{username},'%');
+    -->
+    <select id="findByName" parameterType="java.lang.String" resultType="com.itheima.User">
+        select * from user  where username like '%${value}%'
+    </select>
+
+</mapper>
