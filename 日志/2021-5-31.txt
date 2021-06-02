@@ -1,0 +1,37 @@
+1，学习git
+    1,给自己下载代码添加一个通行证，new ssH
+    2,git命令：git status：查看文件状态
+               git add 文件名  ：给git工作区添加文件
+               git config --global user.email = 2549369524@qq.com :添加文件的上传者信息
+               git config --global user.name  wjq
+               git commit -m "first commit" :把文件添加到管理区，执行
+               git log :查看日志，操作记录
+               git show  +log中的地址：显示这步操作
+               git reset +mic地址：返回这步操作
+               git clone git@github.com:wjq123456-svg/demo.git 将下载的文件重命名
+               git remote add origin git@github.com:wjq123456-svg/SSM_learning_Code.git
+                与指定仓库建立连接
+                git pull --rebase origin main 取出文件
+     3,解决git冲突：
+               git pull  更新代码
+               git push
+     4,团队解决git代码：
+               git branch  branch1
+               git checkout branch1 切换到branch1分支
+               git commit
+               git push
+               git push --set-upstream origin branch1
+               git merge  branch1 把branch1代码合并到main
+ 2,
+ 将本地文件上传到github：
+              a,git init 初始化
+              b,git add . 将文件添加
+              c,git commit -m "提示文件" 将文件添加到github上
+              d,git remote add origin ssh地址  与远程仓库建立连接
+              e,git  push - u origin master
+              如果报错的话
+              f,git  pull --rebase origin master
+ 学习IDEA:
+  
+                
+            
